@@ -1,6 +1,9 @@
 <template>
   <div class="home-page">
     <div class="home-page-title">This is Home Page</div>
+    <el-row>
+      <el-button type="success" round>成功按钮</el-button>
+    </el-row>
   </div>
 </template>
 
