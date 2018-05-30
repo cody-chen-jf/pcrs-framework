@@ -3,15 +3,21 @@
     <loading :isLoading="isLoading"></loading>
     <div class="home-page-title">This is Home Page</div>
     <el-row>
+      <el-button type="success" round @click="showHomePageInfo">显示HomePageInfo</el-button>
       <el-button type="success" round @click="loadingTest">跳转页面</el-button>
     </el-row>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+// import { createNamespacedHelpers } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import Loading from '@/base-components/loading/loading'
+import { HOME_PAGE } from '@/store/namespaces'
+import { SET_HOME_PAGE_INFO } from '@/store/modules/homePage/mutation-types'
 import { getUser, getUserWithOutHttp } from '@/api/user'
+
+// const {mapActions, mapGetters} = createNamespacedHelpers(HOME_PAGE)
 
 export default {
   name: 'HomePage',
@@ -23,10 +29,19 @@ export default {
       isLoading: false
     }
   },
+  computed: {
+    ...mapGetters({
+      homePageInfo: `${HOME_PAGE}/homePageInfo`
+    })
+  },
+  created() {
+    this.setHomePageInfo({name: 'homePage', version: 1.0})
+  },
   methods: {
-    ...mapActions([
-      'setUser'
-    ]),
+    ...mapActions({
+      setHomePageInfo: `${HOME_PAGE}/setHomePageInfo`,
+      setUser: 'setUser'
+    }),
     loadingTest() {
       this.isLoading = !this.isLoading
       setTimeout(() => {
@@ -42,6 +57,9 @@ export default {
         })
         this.isLoading = !this.isLoading
       }, 2000)
+    },
+    showHomePageInfo() {
+      console.log('homePageInfo === ', this.homePageInfo)
     }
   }
 }
