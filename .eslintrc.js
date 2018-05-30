@@ -24,6 +24,7 @@ module.exports = {
     'space-before-function-paren': 0,
     'no-unused-vars': 1,
     'indent': 1,
+    'no-return-await': 0,
     // allow async-await
     'generator-star-spacing': 'off',
     // allow debugger during development

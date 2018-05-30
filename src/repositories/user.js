@@ -1,10 +1,9 @@
-import axios from 'axios'
+import { get } from '@/common/js/httpHelper'
 
-export function getUser() {
+export const getUser = async () => {
   const getUserApiUrl = 'http://localhost:8088/getUser'
-  return axios.get(getUserApiUrl).then((res) => {
-    return Promise.resolve(res.data)
-  })
+  const result = await get(getUserApiUrl)
+  return result.data
 }
 
 export function getUserWithOutHttp() {

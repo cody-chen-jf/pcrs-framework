@@ -15,7 +15,8 @@ import { mapGetters, mapActions } from 'vuex'
 import Loading from '@/base-components/loading/loading'
 import { HOME_PAGE } from '@/store/namespaces'
 import { SET_HOME_PAGE_INFO } from '@/store/modules/homePage/mutation-types'
-import { getUser, getUserWithOutHttp } from '@/api/user'
+import { getUser, getUserWithOutHttp } from '@/repositories/user'
+import * as userService from '@/service/user'
 
 // const {mapActions, mapGetters} = createNamespacedHelpers(HOME_PAGE)
 
@@ -44,17 +45,16 @@ export default {
     }),
     loadingTest() {
       this.isLoading = !this.isLoading
-      setTimeout(() => {
-//        getUser().then((res) => {
+      setTimeout(async () => {
+        let user = await userService.getUserResult()
+        this.setUser(user)
+        this.$router.push('/detailPage')
+
+//        getUserWithOutHttp().then((res) => {
 //          console.log(res)
 //          this.setUser(res)
 //          this.$router.push('/detailPage')
 //        })
-        getUserWithOutHttp().then((res) => {
-          console.log(res)
-          this.setUser(res)
-          this.$router.push('/detailPage')
-        })
         this.isLoading = !this.isLoading
       }, 2000)
     },
