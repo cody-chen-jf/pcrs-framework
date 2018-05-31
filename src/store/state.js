@@ -1,5 +1,6 @@
 const state = {
-  user: {}
+  user: {},
+  newRouter: []
 }
 
 export default state
