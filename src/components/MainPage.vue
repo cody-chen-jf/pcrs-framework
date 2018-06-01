@@ -62,7 +62,7 @@ export default {
           this.$store.dispatch('setUser', this.loginForm).then(() => {
             this.loading = false
             // alert('登录成功')
-            localStorage.setItem('ms_username', permissionList)
+            localStorage.setItem('user_token', '123456')
             this.$router.push('/HomePage')
           }).catch(() => {
             this.loading = false
